@@ -10,6 +10,10 @@ API_URL = 'https://app.fan-ton.com/graphql'
 COLUMNS = './settings/tournament.txt'
 RESULT_FILE = ['./data/tournament.csv']
 
+# for scoring only
+COLUMNS_SCORING = './settings/scoring.txt'
+RESULT_FILE_SCORING = ['./data/scoring.csv']
+
 FIRST = 20000
 
 BODY_TOURNAMENT = \
