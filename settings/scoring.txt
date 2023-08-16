@@ -6,6 +6,7 @@ goals:                 G
 assists:               A
 shotsOnTarget:         SoT
 keyPasses:             KP
+penaltiesWon:          penWon
 cleanSheet:            CS
 saves:                 Sv
 savesInBox:            SvInBox
