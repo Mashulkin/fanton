@@ -1,10 +1,15 @@
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.0.0'
-__data__ = '01.05.2023'
+__version__ = '1.0.1'
+__data__ = '18.10.2024'
 
 
 API_URL = 'https://app.fan-ton.com/graphql'
+
+# ID Tournaments (list of cards)
+# EPL
+RARITIES = 'COMMON'
+LIST_CARDS = 'itFgHRn0z8Bf3bO9fZTbup2Z'
 
 # for NFT cards only
 COLUMNS = './settings/tournament.txt'
@@ -101,5 +106,51 @@ query getTeamDetails($teamId: ID!) {
             }
         }
     }
+}
+"""
+
+BODY_CARDS = \
+"""
+query getCards($myOwn: Boolean, $name: String, $tournaments: [ID!], $teams: [ID!], $positions: [PlayerPosition!], $citizenship: [String!], $rarities: [Rarity!], $tiers: [Int!], $games: [ID!], $userTeams: [ID!], $first: Int = 3, $after: Cursor, $excludedCards: [ID!], $isOnSale: Boolean, $isAtAuction: Boolean, $price: MoneyRangeInput, $orderBy: CardOrder, $goalsAvg: IntRangeInput, $goalsLast5: IntRangeInput, $assistsAvg: IntRangeInput, $assistsLast5: IntRangeInput, $minutesPlayedAvg: IntRangeInput, $minutesPlayedLast5: IntRangeInput, $cleanSheetsAvg: IntRangeInput, $cleanSheetsLast5: IntRangeInput, $isFree: Boolean) {
+  cards(
+    myOwn: $myOwn
+    name: $name
+    tournaments: $tournaments
+    teams: $teams
+    positions: $positions
+    citizenship: $citizenship
+    rarities: $rarities
+    tiers: $tiers
+    games: $games
+    userTeams: $userTeams
+    first: $first
+    after: $after
+    excludedCards: $excludedCards
+    isOnSale: $isOnSale
+    isAtAuction: $isAtAuction
+    price: $price
+    orderBy: $orderBy
+    goalsAvg: $goalsAvg
+    goalsLast5: $goalsLast5
+    assistsAvg: $assistsAvg
+    assistsLast5: $assistsLast5
+    minutesPlayedAvg: $minutesPlayedAvg
+    minutesPlayedLast5: $minutesPlayedLast5
+    cleanSheetsAvg: $cleanSheetsAvg
+    cleanSheetsLast5: $cleanSheetsLast5
+    isFree: $isFree
+  ) {
+    edges {
+      node {
+        id
+        rarity
+        player {
+          id
+          name(locale: EN)
+          teamIds
+        }
+      }
+    }
+  }
 }
 """
