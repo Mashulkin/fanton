@@ -4,56 +4,61 @@ Getting team details
 """
 from simple_settings import settings
 from functions.tournament import get_teamDetails
-from functions.format import formatCardRarity
+from functions.format import formatCardRarity, formatRealTeams
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __data__ = '18.10.2024'
 
 
-def realTeamDetails(listOfCards, realPlayerId):
-    realTeamId = ''
+def realTeamDetails(listOFTournRealTeams, listOfCards, realPlayerId):
+    realTeamIds, realTeamName = [''] * 2
     for card in listOfCards:
         if card['node']['player']['id'] == realPlayerId:
-            realTeamId = card['node']['player']['teamIds'][-1]
-            break
+            realTeamIds = card['node']['player']['teamIds']
+            for team in listOFTournRealTeams:
+                if team['team']['id'] in realTeamIds:
+                    realTeamName = team['team']['name']
+                    realTeamName = formatRealTeams(realTeamName)
+                    break
     
-    return realTeamId
+    return realTeamIds, realTeamName
 
 
-def teamDetails(fantasyTeamId, listOfCards):
+def teamDetails(fantasyTeamId, listOFTournRealTeams, listOfCards):
     teamData = get_teamDetails(fantasyTeamId)
 
     card1PlayerName = teamData['data']['node']['cards'][0]['player']['name']
     card1PlayerId = teamData['data']['node']['cards'][0]['player']['id']
-    card1TeamId = realTeamDetails(listOfCards, card1PlayerId)
+    card1TeamId, card1TeamName = realTeamDetails(listOFTournRealTeams, listOfCards, card1PlayerId)
     card1Rarity= teamData['data']['node']['cards'][0]['rarity'].lower()
 
     card2PlayerName = teamData['data']['node']['cards'][1]['player']['name']
     card2PlayerId = teamData['data']['node']['cards'][1]['player']['id']
-    card2TeamId = realTeamDetails(listOfCards, card2PlayerId)
+    card2TeamId, card2TeamName = realTeamDetails(listOFTournRealTeams, listOfCards, card2PlayerId)
     card2Rarity= teamData['data']['node']['cards'][1]['rarity'].lower()
 
     card3PlayerName = teamData['data']['node']['cards'][2]['player']['name']
     card3PlayerId = teamData['data']['node']['cards'][2]['player']['id']
-    card3TeamId = realTeamDetails(listOfCards, card3PlayerId)
+    card3TeamId, card3TeamName = realTeamDetails(listOFTournRealTeams, listOfCards, card3PlayerId)
     card3Rarity= teamData['data']['node']['cards'][2]['rarity'].lower()
 
     card4PlayerName = teamData['data']['node']['cards'][3]['player']['name']
     card4PlayerId = teamData['data']['node']['cards'][3]['player']['id']
-    card4TeamId = realTeamDetails(listOfCards, card4PlayerId)
+    card4TeamId, card4TeamName = realTeamDetails(listOFTournRealTeams, listOfCards, card4PlayerId)
     card4Rarity= teamData['data']['node']['cards'][3]['rarity'].lower()
 
     try:
         card5PlayerName = teamData['data']['node']['cards'][4]['player']['name']
         card5PlayerId = teamData['data']['node']['cards'][4]['player']['id']
-        card5TeamId = realTeamDetails(listOfCards, card5PlayerId)
+        card5TeamId, card5TeamName = realTeamDetails(listOFTournRealTeams, listOfCards, card5PlayerId)
         card5Rarity= teamData['data']['node']['cards'][4]['rarity'].lower()
     except IndexError:
         card5PlayerName = ''
         card5PlayerId = ''
         card5TeamId = ''
+        card5TeamName = ''
         card5Rarity = ''
 
     cardCaptain = teamData['data']['node']['captain']['id']
@@ -64,11 +69,11 @@ def teamDetails(fantasyTeamId, listOfCards):
     card4Rarity = formatCardRarity(card4Rarity)
     card5Rarity = formatCardRarity(card5Rarity)
 
-    return card1PlayerName, card1PlayerId, card1TeamId, card1Rarity, \
-        card2PlayerName, card2PlayerId, card2TeamId, card2Rarity, \
-        card3PlayerName, card3PlayerId, card3TeamId, card3Rarity, \
-        card4PlayerName, card4PlayerId, card4TeamId, card4Rarity, \
-        card5PlayerName, card5PlayerId, card5TeamId, card5Rarity, cardCaptain
+    return card1PlayerName, card1PlayerId, card1TeamId, card1TeamName, card1Rarity, \
+        card2PlayerName, card2PlayerId, card2TeamId, card2TeamName, card2Rarity, \
+        card3PlayerName, card3PlayerId, card3TeamId, card3TeamName, card3Rarity, \
+        card4PlayerName, card4PlayerId, card4TeamId, card4TeamName, card4Rarity, \
+        card5PlayerName, card5PlayerId, card5TeamId, card5TeamName, card5Rarity, cardCaptain
 
 
 def scoringDetails(teamData, pos):

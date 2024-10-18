@@ -7,7 +7,7 @@ from common_modules.parser import ParserPost
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __data__ = '18.10.2024'
 
 
@@ -29,10 +29,10 @@ def get_teamDetails(fantasyTeamId):
     return team
 
 
-def get_cards():
+def get_cards(realTournamentId):
     payload = settings.BODY_CARDS
     variables = {'first': settings.FIRST, 'rarities': settings.RARITIES, \
-                 'tournaments': settings.LIST_CARDS}
+                 'tournaments': realTournamentId}
     requests_data = ParserPost(settings.API_URL, payload, variables)
     card = requests_data.parser_graphql_result_var()
 

@@ -16,7 +16,7 @@ from functions.players import teamDetails
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __data__ = '18.10.2024'
 
 
@@ -24,13 +24,16 @@ ORDER = list(map(lambda x: x.split(':')[0].strip(), \
     read_txt(settings.COLUMNS).split('\n')))
 
 
-def tournInfo(tournament, cards):
+def tournInfo(tournament):
     """
     The main module for performing all operations of a request
        and writing to a file
     """
     print_headline(settings.RESULT_FILE[0], settings.COLUMNS, ORDER)
     data = tournament['data']['node']
+    realTournamentId = data['tournaments'][0]['id']
+    cards = get_cards(realTournamentId)
+    listOFTournRealTeams = data['tournamentTeams']
     listOfCards = cards['data']['cards']['edges']
     numberOfTeams = data['numberOfTeams']
     nameTourn = data['enName']
@@ -51,12 +54,12 @@ def tournInfo(tournament, cards):
         except IndexError:
             idCard5 = ''
         
-        card1PlayerName, card1PlayerId, card1TeamId, card1Rarity, \
-        card2PlayerName, card2PlayerId, card2TeamId, card2Rarity, \
-        card3PlayerName, card3PlayerId, card3TeamId, card3Rarity, \
-        card4PlayerName, card4PlayerId, card4TeamId, card4Rarity, \
-        card5PlayerName, card5PlayerId, card5TeamId, card5Rarity, \
-        cardCaptain = teamDetails(fantasyTeamId, listOfCards)
+        card1PlayerName, card1PlayerId, card1TeamId, card1TeamName, card1Rarity, \
+        card2PlayerName, card2PlayerId, card2TeamId, card2TeamName, card2Rarity, \
+        card3PlayerName, card3PlayerId, card3TeamId, card3TeamName, card3Rarity, \
+        card4PlayerName, card4PlayerId, card4TeamId, card4TeamName, card4Rarity, \
+        card5PlayerName, card5PlayerId, card5TeamId, card5TeamName, card5Rarity, \
+        cardCaptain = teamDetails(fantasyTeamId, listOFTournRealTeams, listOfCards)
 
         # Data generation and writing to file
         data_tournament = {
@@ -72,22 +75,27 @@ def tournInfo(tournament, cards):
             'card1PlayerName': card1PlayerName,
             'card1PlayerId': card1PlayerId,
             'card1TeamId': card1TeamId,
+            'card1TeamName': card1TeamName,
             'card1Rarity': card1Rarity,
             'card2PlayerName': card2PlayerName,
             'card2PlayerId': card2PlayerId,
             'card2TeamId': card2TeamId,
+            'card2TeamName': card2TeamName,
             'card2Rarity': card2Rarity,
             'card3PlayerName': card3PlayerName,
             'card3PlayerId': card3PlayerId,
             'card3TeamId': card3TeamId,
+            'card3TeamName': card3TeamName,
             'card3Rarity': card3Rarity,
             'card4PlayerName': card4PlayerName,
             'card4PlayerId': card4PlayerId,
             'card4TeamId': card4TeamId,
+            'card4TeamName': card4TeamName,
             'card4Rarity': card4Rarity,
             'card5PlayerName': card5PlayerName,
             'card5PlayerId': card5PlayerId,
             'card5TeamId': card5TeamId,
+            'card5TeamName': card5TeamName,
             'card5Rarity': card5Rarity,
             'cardCaptain': cardCaptain,
         }
@@ -100,8 +108,7 @@ def main():
     Request information about the fantasy tournament. General request
     """
     tournament = get_tournaments(sys.argv[1])
-    cards = get_cards()
-    tournInfo(tournament, cards)
+    tournInfo(tournament)
 
 
 if __name__ == '__main__':

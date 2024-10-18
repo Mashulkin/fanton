@@ -6,10 +6,7 @@ __data__ = '18.10.2024'
 
 API_URL = 'https://app.fan-ton.com/graphql'
 
-# ID Tournaments (list of cards)
-# EPL
 RARITIES = 'COMMON'
-LIST_CARDS = 'itFgHRn0z8Bf3bO9fZTbup2Z'
 
 # for NFT cards only
 COLUMNS = './settings/tournament.txt'
