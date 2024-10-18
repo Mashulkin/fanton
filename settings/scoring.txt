@@ -1,5 +1,6 @@
-cardId:                id
+realPlayerId:          id
 cardPlayerName:        name
+abbr:                  team
 position:              pos
 minutes:               min
 goals:                 G
@@ -10,6 +11,7 @@ penaltiesWon:          penWon
 cleanSheet:            CS
 saves:                 Sv
 savesInBox:            SvInBox
+penaltiesSaved:        penSaved
 penaltiesCommitted:    penCommit
 goalsConceded:         goalConc
 yellowCards:           YC

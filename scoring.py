@@ -11,13 +11,13 @@ from common_modules.txt_r import read_txt
 from common_modules.headline import print_headline
 from common_modules.my_remove import remove_file
 
-from functions.tournament import get_tournaments, get_teamDetails
+from functions.tournament import get_tournaments, get_teamDetails, get_cards
 from functions.players import scoringDetails
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.0.0'
-__data__ = '15.08.2023'
+__version__ = '1.1.0'
+__data__ = '18.10.2024'
 
 
 ORDER = list(map(lambda x: x.split(':')[0].strip(), \
@@ -31,6 +31,10 @@ def tournInfo(tournament):
     """
     print_headline(settings.RESULT_FILE_SCORING[0], settings.COLUMNS_SCORING, ORDER)
     data = tournament['data']['node']
+    realTournamentId = data['tournaments'][0]['id']
+    cards = get_cards(realTournamentId)
+    listOFTournRealTeams = data['tournamentTeams']
+    listOfCards = cards['data']['cards']['edges']
     playersId = []
     # allScoring = []
 
@@ -41,7 +45,7 @@ def tournInfo(tournament):
         position = ''
 
         for pos in range(4):
-            cardPlayerName, cardId, minutes, \
+            cardPlayerName, realPlayerId, abbr, minutes, \
                 missedPasses, foulsDrawn, savesInBox, saves, \
                 longBallsWon, accuratePasses, keyPasses, \
                 tackles, accurateCrosses, blockedShots, \
@@ -49,7 +53,8 @@ def tournInfo(tournament):
                 bigChancesCreated, assists, goalsConceded, shotsOnTarget, \
                 fouls, yellowCards, goals, clearances, scoring, \
                 penaltiesCommitted, bigChancesMissed, hitWoodwork, penaltiesWon,\
-                clearanceOffline, errorLeadToGoal = scoringDetails(teamData, pos)
+                clearanceOffline, errorLeadToGoal, penaltiesSaved \
+                    = scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards)
 
             if minutes == '':
                 continue
@@ -63,12 +68,13 @@ def tournInfo(tournament):
             position = 'M' if pos == 2 else position
             position = 'F' if pos == 3 else position
 
-            if cardId not in playersId:
-                playersId.append(cardId)
+            if realPlayerId not in playersId:
+                playersId.append(realPlayerId)
                 # Data generation and writing to file
                 data_tournament = {
                     'cardPlayerName': cardPlayerName,
-                    'cardId': cardId,
+                    'realPlayerId': realPlayerId,
+                    'abbr': abbr,
                     'position': position,
                     'minutes': minutes,
                     'missedPasses': missedPasses,
@@ -98,6 +104,7 @@ def tournInfo(tournament):
                     'penaltiesWon': penaltiesWon,
                     'clearanceOffline': clearanceOffline,
                     'errorLeadToGoal': errorLeadToGoal,
+                    'penaltiesSaved': penaltiesSaved,
                 }
 
                 write_csv(settings.RESULT_FILE_SCORING[0], data_tournament, ORDER)
