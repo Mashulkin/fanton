@@ -108,6 +108,70 @@ def tournInfo(tournament):
                 }
 
                 write_csv(settings.RESULT_FILE_SCORING[0], data_tournament, ORDER)
+
+# crutch for sub players
+    for item in data['teams']['edges']:
+        # ***** Main query *****
+        fantasyTeamId = item['node']['id']
+        teamData = get_teamDetails(fantasyTeamId)
+        position = ''
+
+        pos = 4
+        cardPlayerName, realPlayerId, abbr, minutes, \
+            missedPasses, foulsDrawn, savesInBox, saves, \
+            longBallsWon, accuratePasses, keyPasses, \
+            tackles, accurateCrosses, blockedShots, \
+            interceptions, cleanSheet, successfulDribbles, \
+            bigChancesCreated, assists, goalsConceded, shotsOnTarget, \
+            fouls, yellowCards, goals, clearances, scoring, \
+            penaltiesCommitted, bigChancesMissed, hitWoodwork, penaltiesWon,\
+            clearanceOffline, errorLeadToGoal, penaltiesSaved \
+                = scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards)
+
+        if minutes == '':
+            continue
+
+        if realPlayerId not in playersId:
+            playersId.append(realPlayerId)
+            # Data generation and writing to file
+            data_tournament = {
+                'cardPlayerName': cardPlayerName,
+                'realPlayerId': realPlayerId,
+                'abbr': abbr,
+                'position': position,
+                'minutes': minutes,
+                'missedPasses': missedPasses,
+                'foulsDrawn': foulsDrawn,
+                'savesInBox': savesInBox,
+                'saves': saves,
+                'longBallsWon': longBallsWon,
+                'accuratePasses': accuratePasses,
+                'keyPasses': keyPasses,
+                'tackles': tackles,
+                'accurateCrosses': accurateCrosses,
+                'blockedShots': blockedShots,
+                'interceptions': interceptions,
+                'cleanSheet': cleanSheet,
+                'successfulDribbles': successfulDribbles,
+                'bigChancesCreated': bigChancesCreated,
+                'assists': assists,
+                'goalsConceded': goalsConceded,
+                'shotsOnTarget': shotsOnTarget,
+                'fouls': fouls,
+                'yellowCards': yellowCards,
+                'goals': goals,
+                'clearances': clearances,
+                'penaltiesCommitted': penaltiesCommitted,
+                'bigChancesMissed': bigChancesMissed,
+                'hitWoodwork': hitWoodwork,
+                'penaltiesWon': penaltiesWon,
+                'clearanceOffline': clearanceOffline,
+                'errorLeadToGoal': errorLeadToGoal,
+                'penaltiesSaved': penaltiesSaved,
+            }
+
+            write_csv(settings.RESULT_FILE_SCORING[0], data_tournament, ORDER)
+
     # print(allScoring)
 
 def main():
