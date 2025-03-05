@@ -16,8 +16,8 @@ from functions.players import teamDetails
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.1.1'
-__data__ = '18.10.2024'
+__version__ = '1.1.2'
+__data__ = '05.03.2025'
 
 
 ORDER = list(map(lambda x: x.split(':')[0].strip(), \
@@ -61,6 +61,8 @@ def tournInfo(tournament):
         card5PlayerName, card5PlayerId, card5TeamId, card5TeamName, card5Rarity, \
         cardCaptain = teamDetails(fantasyTeamId, listOFTournRealTeams, listOfCards)
 
+        card1Point, card2Point, card3Point, card4Point, card5Point = [''] * 5
+
         # Data generation and writing to file
         data_tournament = {
             'fantasyTeamPlace': fantasyTeamPlace,
@@ -98,6 +100,11 @@ def tournInfo(tournament):
             'card5TeamName': card5TeamName,
             'card5Rarity': card5Rarity,
             'cardCaptain': cardCaptain,
+            'card1Point': card1Point,
+            'card2Point': card2Point,
+            'card3Point': card3Point,
+            'card4Point': card4Point,
+            'card5Point': card5Point,
         }
 
         write_csv(settings.RESULT_FILE[0], data_tournament, ORDER)

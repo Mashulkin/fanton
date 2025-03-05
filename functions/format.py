@@ -6,7 +6,7 @@ Formatting
 
 __author__ = 'Vadim Arsenev'
 __version__ = '1.2.0'
-__data__ = '18.10.2024'
+__data__ = '05.03.2025'
 
 
 def formatCardRarity(cardRarity):
@@ -42,5 +42,7 @@ def formatRealTeams(teamName):
     abbr = 'TOT' if teamName == 'Tottenham Hotspur' else abbr
     abbr = 'WHU' if teamName == 'West Ham United' else abbr
     abbr = 'WOL' if teamName == 'Wolverhampton Wanderers' else abbr
+    abbr = 'PSG' if teamName == 'Paris Saint Germain' else abbr
+    abbr = 'BVB' if teamName == 'Borussia Dortmund' else abbr
 
     return abbr
