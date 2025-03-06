@@ -16,8 +16,8 @@ from functions.players import teamDetails
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.1.2'
-__data__ = '05.03.2025'
+__version__ = '1.1.3'
+__data__ = '06.03.2025'
 
 
 ORDER = list(map(lambda x: x.split(':')[0].strip(), \
@@ -62,6 +62,7 @@ def tournInfo(tournament):
         cardCaptain = teamDetails(fantasyTeamId, listOFTournRealTeams, listOfCards)
 
         card1Point, card2Point, card3Point, card4Point, card5Point = [''] * 5
+        pointPerPlayer, remainingPlayers = [''] * 2
 
         # Data generation and writing to file
         data_tournament = {
@@ -105,6 +106,9 @@ def tournInfo(tournament):
             'card3Point': card3Point,
             'card4Point': card4Point,
             'card5Point': card5Point,
+            'pointPerPlayer': pointPerPlayer,
+            'remainingPlayers': remainingPlayers,
+
         }
 
         write_csv(settings.RESULT_FILE[0], data_tournament, ORDER)

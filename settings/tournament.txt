@@ -1,7 +1,9 @@
 fantasyTeamPlace:       Place
 fantasyTeamScore:       Score
+pointPerPlayer:         pointPerPlayer
 accountName:            Name
 accountId:              accountId
+remainingPlayers:       remainingPlayers
 idCard1:                idCard1
 card1Rarity:            card1Rarity
 card1PlayerName:        card1PlayerName

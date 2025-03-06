@@ -8,8 +8,8 @@ from functions.format import formatCardRarity, formatRealTeams
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.2.2'
-__data__ = '18.10.2024'
+__version__ = '1.2.3'
+__data__ = '06.03.2025'
 
 
 def realTeamDetails(listOFTournRealTeams, listOfCards, realPlayerId):
@@ -95,6 +95,7 @@ def scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards):
         cardPlayerName = ''
         cardId = ''
         realPlayerId = ''
+        abbr = ''
 
     scoring = []
     for item in teamData['data']['scores']['edges']:

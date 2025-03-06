@@ -5,7 +5,7 @@ Formatting
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.2.1'
+__version__ = '1.2.2'
 __data__ = '06.03.2025'
 
 
@@ -46,7 +46,7 @@ def formatRealTeams(teamName):
     abbr = 'BVB' if teamName == 'Borussia Dortmund' else abbr
     abbr = 'ATM' if teamName == 'Atlético Madrid' else abbr
     abbr = 'LEV' if teamName == 'Bayer 04 Leverkusen' else abbr
-    abbr = 'LIL' if teamName == 'LOSC Lille"' else abbr
+    abbr = 'LIL' if teamName == 'LOSC Lille' else abbr
     abbr = 'INT' if teamName == 'Inter' else abbr
     abbr = 'BAR' if teamName == 'FC Barcelona' else abbr
     abbr = 'BAY' if teamName == 'FC Bayern München' else abbr
