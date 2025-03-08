@@ -5,8 +5,8 @@ Formatting
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.2.2'
-__data__ = '06.03.2025'
+__version__ = '1.2.3'
+__data__ = '08.03.2025'
 
 
 def formatCardRarity(cardRarity):
@@ -55,5 +55,21 @@ def formatRealTeams(teamName):
     abbr = 'RMA' if teamName == 'Real Madrid' else abbr
     abbr = 'BEN' if teamName == 'Benfica' else abbr
     abbr = 'BRU' if teamName == 'Club Brugge' else abbr
+    abbr = 'ZEN' if teamName == 'Zenit' else abbr
+    abbr = 'KRA' if teamName == 'Krasnodar' else abbr
+    abbr = 'RUB' if teamName == 'Rubin Kazan' else abbr
+    abbr = 'KRY' if teamName == 'Krylya Sovetov' else abbr
+    abbr = 'AKR' if teamName == 'Akron' else abbr
+    abbr = 'LOK' if teamName == 'Lokomotiv Moskva' else abbr
+    abbr = 'CSK' if teamName == 'CSKA Moskva' else abbr
+    abbr = 'DMO' if teamName == 'Dinamo Moskva' else abbr
+    abbr = 'ROS' if teamName == 'Rostov' else abbr
+    abbr = 'SPA' if teamName == 'Spartak Moskva' else abbr
+    abbr = 'PNN' if teamName == 'FK Nizjni Novgorod' else abbr
+    abbr = 'FAK' if teamName == 'Fakel' else abbr
+    abbr = 'ORE' if teamName == 'Orenburg' else abbr
+    abbr = 'AKH' if teamName == 'Akhmat Grozny' else abbr
+    abbr = 'DMH' if teamName == 'Makhachkala' else abbr
+    abbr = 'KHI' if teamName == 'Khimki' else abbr
 
     return abbr
