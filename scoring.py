@@ -16,8 +16,8 @@ from functions.players import scoringDetails
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.1.0'
-__data__ = '18.10.2024'
+__version__ = '1.1.1'
+__data__ = '13.03.2025'
 
 
 ORDER = list(map(lambda x: x.split(':')[0].strip(), \
@@ -51,7 +51,7 @@ def tournInfo(tournament):
                 tackles, accurateCrosses, blockedShots, \
                 interceptions, cleanSheet, successfulDribbles, \
                 bigChancesCreated, assists, goalsConceded, shotsOnTarget, \
-                fouls, yellowCards, goals, clearances, scoring, \
+                fouls, yellowCards, redCards, goals, clearances, scoring, \
                 penaltiesCommitted, bigChancesMissed, hitWoodwork, penaltiesWon,\
                 clearanceOffline, errorLeadToGoal, penaltiesSaved \
                     = scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards)
@@ -96,6 +96,7 @@ def tournInfo(tournament):
                     'shotsOnTarget': shotsOnTarget,
                     'fouls': fouls,
                     'yellowCards': yellowCards,
+                    'redCards': redCards,
                     'goals': goals,
                     'clearances': clearances,
                     'penaltiesCommitted': penaltiesCommitted,
@@ -123,7 +124,7 @@ def tournInfo(tournament):
             tackles, accurateCrosses, blockedShots, \
             interceptions, cleanSheet, successfulDribbles, \
             bigChancesCreated, assists, goalsConceded, shotsOnTarget, \
-            fouls, yellowCards, goals, clearances, scoring, \
+            fouls, yellowCards, redCards, goals, clearances, scoring, \
             penaltiesCommitted, bigChancesMissed, hitWoodwork, penaltiesWon,\
             clearanceOffline, errorLeadToGoal, penaltiesSaved \
                 = scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards)
@@ -159,6 +160,7 @@ def tournInfo(tournament):
                 'shotsOnTarget': shotsOnTarget,
                 'fouls': fouls,
                 'yellowCards': yellowCards,
+                'redCards': redCards,
                 'goals': goals,
                 'clearances': clearances,
                 'penaltiesCommitted': penaltiesCommitted,

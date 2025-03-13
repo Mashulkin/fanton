@@ -15,6 +15,7 @@ penaltiesSaved:        penSaved
 penaltiesCommitted:    penCommit
 goalsConceded:         goalConc
 yellowCards:           YC
+redCards:              RC
 bigChancesCreated:     BCC
 bigChancesMissed:      BCmis
 successfulDribbles:    succDribbles

@@ -8,8 +8,8 @@ from functions.format import formatCardRarity, formatRealTeams
 
 
 __author__ = 'Vadim Arsenev'
-__version__ = '1.2.3'
-__data__ = '06.03.2025'
+__version__ = '1.2.4'
+__data__ = '13.03.2025'
 
 
 def realTeamDetails(listOFTournRealTeams, listOfCards, realPlayerId):
@@ -82,9 +82,9 @@ def scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards):
         tackles, accurateCrosses, blockedShots, \
         interceptions, cleanSheet, successfulDribbles, \
         bigChancesCreated, assists, goalsConceded, shotsOnTarget, \
-        fouls, yellowCards, goals, clearances, penaltiesCommitted, \
+        fouls, yellowCards, redCards, goals, clearances, penaltiesCommitted, \
         bigChancesMissed, hitWoodwork, penaltiesWon, clearanceOffline, \
-        errorLeadToGoal, penaltiesSaved= [''] * 29
+        errorLeadToGoal, penaltiesSaved= [''] * 30
 
     try:
         cardPlayerName = teamData['data']['node']['cards'][pos]['player']['name']
@@ -182,6 +182,10 @@ def scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards):
                 yellowCards = item['node']['points']
                 continue
 
+            if item['node']['ruleId'] == 'v4_red_cards':
+                redCards = item['node']['points']
+                continue
+
             if item['node']['ruleId'] == 'v4_goals':
                 goals = item['node']['points']
                 continue
@@ -222,7 +226,7 @@ def scoringDetails(teamData, pos, listOFTournRealTeams, listOfCards):
         savesInBox, saves, longBallsWon, accuratePasses, keyPasses, \
         tackles, accurateCrosses, blockedShots, interceptions, \
         cleanSheet, successfulDribbles, bigChancesCreated, assists, \
-        goalsConceded, shotsOnTarget, fouls, yellowCards, goals, \
+        goalsConceded, shotsOnTarget, fouls, yellowCards, redCards, goals, \
         clearances, scoring, penaltiesCommitted, bigChancesMissed, \
         hitWoodwork, penaltiesWon, clearanceOffline, errorLeadToGoal, \
         penaltiesSaved
